@@ -1,0 +1,34 @@
+<template>
+    <div>
+        <div>This is page1.</div>
+        <br>
+        <label>Hello, </label>
+        <input type="text" value="{{userInfo.name}}" on-input="onChange($event)" on-propertychange="onChange($event)">
+    </div>
+</template>
+
+<script>
+import {connect} from 'san-store';
+import * as actionNames from './../store/userInfo/action-name';
+
+const mapState = {
+    userInfo: 'userInfo'
+}
+
+const mapAction = {
+    setName: actionNames.SET_NAME
+}
+
+const Page1 = {
+
+    // 为了解决低版本IE input事件的兼容性，必须同时绑定input和propertychange事件
+    onChange: function(e) {
+        // 解决低版本IE中e.target兼容性问题
+        e = e || event;
+        let target = e.target || e.srcElement; 
+        this.actions.setName(target.value);
+    }
+}
+
+export default connect.san(mapState, mapAction)(Page1);
+</script>

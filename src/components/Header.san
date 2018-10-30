@@ -1,0 +1,37 @@
+<template>
+    <div>
+        <H1>Hello, {{name}}!</H1>
+        <router-link to="/">Home</router-link>　
+        <router-link to="/page1">Page1</router-link>
+        <hr>
+    </div>
+</template>
+
+<script>
+import {Link} from 'san-router';
+import {connect} from 'san-store';
+import * as actionNames from '../store/userInfo/action-name';
+
+const mapState = {
+    name: 'userInfo.name',
+}
+const mapAction = {
+    init: actionNames.INIT,
+}
+
+const Header = {
+    components: {
+        'router-link': Link
+    },
+    attached() {
+        this.actions.init();
+    }
+}
+
+export default connect.san(mapState, mapAction)(Header);
+</script>
+
+
+<style>
+
+</style>

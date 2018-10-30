@@ -1,0 +1,26 @@
+<template>
+    <div>
+        <san-header></san-header>
+        <router-view></router-view>
+    </div>
+</template>
+
+<script>
+    import router from './router';
+
+    import Header from './components/Header';
+
+    export default {
+        components: {
+            'san-header': Header
+        },
+        attached() {
+            router.start();
+        }
+    }
+
+</script>
+
+<style>
+
+</style>
